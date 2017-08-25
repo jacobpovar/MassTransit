@@ -106,7 +106,7 @@ namespace MassTransit
             configurator.AddEndpointSpecification(new SetMessageSerializerReceiveEndpointSpecification<XmlMessageSerializer>());
         }
 
-#if !NETCORE
+#if (!NETCORE && !NETCORE20)
         /// <summary>
         /// Serialize message using the .NET binary formatter (also adds support for the binary deserializer)
         /// </summary>

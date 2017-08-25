@@ -16,7 +16,7 @@ namespace MassTransit.Tests.Serialization {
     [TestFixture(typeof(JsonMessageSerializer))]
     [TestFixture(typeof(BsonMessageSerializer))]
     [TestFixture(typeof(EncryptedMessageSerializer))]
-#if !NETCORE
+#if !NETCORE && !NETCORE20
     [TestFixture(typeof(BinaryMessageSerializer))]
 #endif
     public class ReceiveFault_Serialization_Specs :

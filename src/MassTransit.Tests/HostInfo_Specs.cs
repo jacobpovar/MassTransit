@@ -50,7 +50,7 @@ namespace MassTransit.Tests
         }
     }
 
-#if !NETCORE
+#if !NETCORE && !NETCORE20
 
     [TestFixture]
     public class Host_info_should_be_included_on_binary_serialization :

@@ -32,7 +32,7 @@ namespace MassTransit.Util.Scanning
 
         public static IEnumerable<Assembly> FindAssemblies(AssemblyLoadFailure loadFailure, bool includeExeFiles, AssemblyFilter filter)
         {
-#if NETCORE
+#if (NETCORE || NETCORE20)
             var assemblyPath = AppContext.BaseDirectory;
             var binPath = string.Empty;            
 #else

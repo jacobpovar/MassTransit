@@ -70,7 +70,7 @@ namespace MassTransit.Tests.Serialization
                 Serializer = new EncryptedMessageSerializer(streamProvider);
                 Deserializer = new EncryptedMessageDeserializer(BsonMessageSerializer.Deserializer, streamProvider);
             }
-#if !NETCORE
+#if !NETCORE && !NETCORE20
             else if (_serializerType == typeof(BinaryMessageSerializer)) {
                 Serializer = new BinaryMessageSerializer();
                 Deserializer = new BinaryMessageDeserializer();

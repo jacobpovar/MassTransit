@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net452;netstandard1.6</TargetFrameworks>
-    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <TargetFrameworks>net452;netstandard1.6;netstandard2.0</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\MassTransit.snk</AssemblyOriginatorKeyFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -9,6 +8,9 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
     <DefineConstants>$(DefineConstants);NETCORE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <DefineConstants>$(DefineConstants);NETCORE20</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\MassTransit.xml</DocumentationFile>
@@ -32,7 +34,18 @@
     <Compile Remove="Monitoring/Performance/**" />
     <Compile Remove="Configuration/PerformanceCounterExtensions.cs" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net452'">
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <Compile Remove="Util/NHProfIntegration.cs" />
+    <Compile Remove="Configuration/BusConfigurators/PerformanceCounterBusFactorySpecification.cs" />
+    <Compile Remove="Serialization/StaticHeaders.cs" />
+    <Compile Remove="Serialization/StaticConsumeContext.cs" />
+    <Compile Remove="Serialization/ExtensionsForBinaryMessageSerializer.cs" />
+    <Compile Remove="Serialization/BinaryMessageSerializer.cs" />
+    <Compile Remove="Serialization/BinaryMessageDeserializer.cs" />
+    <Compile Remove="Monitoring/Performance/**" />
+    <Compile Remove="Configuration/PerformanceCounterExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net452' OR '$(TargetFramework)'=='netstandard2.0'">
     <Compile Remove="NetCore.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -41,7 +54,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.1" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' OR '$(TargetFramework)' == 'netstandard2.0' ">
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Collections.Specialized" Version="4.3.0" />

@@ -27,7 +27,7 @@ namespace MassTransit.Tests
         [OneTimeSetUp]
         public void Before_any()
         {
-#if NETCORE
+#if (NETCORE || NETCORE20)
             string path = AppContext.BaseDirectory;
             string file = Path.Combine(path, "masstransit.tests.log4net.xml");
             var logRepository = LogManager.GetRepository(System.Reflection.Assembly.GetEntryAssembly());
